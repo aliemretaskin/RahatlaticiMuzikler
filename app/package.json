@@ -20,6 +20,16 @@
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0",
-        "vue": "^2.5.17"
+        "vue": "^2.5.17",
+        "vue-template-compiler": "^2.6.10",
+        "less": "^2.7.1",
+        "less-loader": "^2.2.3",
+        "vuex": "^2.0.0",
+        "vue-awesome-swiper": "^2.2.6",
+        "vue-axios": "^2.1.4",
+        "vue-lazyload": "1.0.0-rc12",
+        "vue-resource": "^1.0.3",
+        "vue-router": "^2.1.1",
+        "rxjs": "^5.0.2"
     }
 }
