@@ -1,0 +1,60 @@
+version: '2'
+
+services:  
+
+   webserver:
+      image: nginx:latest
+      container_name: webserver
+      restart: unless-stopped
+      ports:
+         - 8080:80
+      volumes:
+         - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+      volumes_from:
+         - php
+      networks:
+         - default
+
+   php:
+      build: ./docker/php/
+      container_name: php
+      volumes:
+         - ./app/:/var/www/html
+      links:
+         - db
+         - redis
+
+      environment:
+         DB_PORT: 3306
+         DB_HOST: db
+
+   redis:
+      image: redis:latest
+      container_name: redis
+      ports:
+         - 6382:6379
+
+   phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      container_name: phpmyadmin
+      links:
+         - db:db
+      ports:
+         - 9191:80
+      environment:
+         MYSQL_ROOT_PASSWORD: teknasyon
+      networks:
+         - default
+
+    db:
+      image: mysql:5.7
+      container_name: db
+      environment:
+         MYSQL_ROOT_PASSWORD: teknasyon
+         MYSQL_DATABASE: laravel
+      volumes:
+         - ./db:/var/lib/mysql
+      ports:
+         - 33065:3306
+      networks:
+         - default
