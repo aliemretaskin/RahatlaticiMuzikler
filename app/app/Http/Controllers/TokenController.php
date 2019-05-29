@@ -12,6 +12,7 @@ class TokenController extends Controller
     /**
      * Create a new user token
      *
+     * @param  $token null or user token
      * @return json
      */
     public function generateToken($token = null)
@@ -22,6 +23,6 @@ class TokenController extends Controller
     		Token::create(['token' => $token]);
     	}
     	
-    	return response()->json(['status' => true, 'version' => env('APP_VERSION'), 'token' => $token]);
+    	return response()->json(['status' => true, 'version' => env('APP_VERSION'), 'token' => $token, 'language' => 'tr']);
     }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-if="init">
     <action-sheet></action-sheet>
     <transition :name="routerViewAnimation">
       <router-view v-show="!blurBgShow"></router-view>
@@ -103,7 +103,7 @@ export default {
             localStorage.setItem('token', response.data.token);
             
             axios.defaults.headers.common = {
-                  'Authorization': 'Bearer ' +  response.data.token,
+                  'Authorization': response.data.token,
             };
 
             if (version != response.data.version) 
@@ -112,11 +112,13 @@ export default {
               location.reload();
             }
             
+            this.init = true;
           }
       });
   },
   data() {
     return {
+      init: false,
       iconPlay: require("./assets/icon-play.png"),
       iconPause: require("./assets/icon-pause.png"),
       playPageShow: false,
