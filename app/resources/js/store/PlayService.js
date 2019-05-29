@@ -74,11 +74,13 @@ export default {
       state.duration = time
     },
     play (state) {
+      player.pause();
+      player.currentTime = 0;
       player.play(state.song.mid);
       state.playing = true;
     },
     pause (state) {
-        player.pause();
+      player.pause();
       state.playing = false
     },
     playFront (state) {
@@ -89,7 +91,14 @@ export default {
     playNext (state) {
       state.index = (state.index + 1) % state.playList.length
       state.song = state.playList[state.index]
+
+      //console.log(player.__.audio.volume = 0);
+
+      player.pause();
+      player.currentTime = 0;
+      //state.playing = false;
       player.play(state.song.mid);
+      //state.playing = true;
     },
     playContinue (state) {
       switch (state.playMode) {
@@ -122,6 +131,7 @@ export default {
     song:state => {
         return state.song
     },
+    player: state => { return player},
     coverImgUrl:state => {
       if(_.isEmpty(state.song.albummid))
         return def.DEFAULT_IMG

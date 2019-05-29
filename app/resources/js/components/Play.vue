@@ -6,13 +6,12 @@
            @click="hidePlayPage">
         <img src="../assets/icon-jiantou.png" alt="">
       </div>
-      <img v-lazy="coverImgUrl" :src="coverImgUrl">
+      <img v-if="!_.isEmpty(coverImgUrl)" :src="coverImgUrl">
     </div>
     <div class="button-group">
       <div class="progress-bar-group">
         <div class="progress-bar">
-          <div class="progress" :style="{width:indicatorPosition+'%'}"></div>
-          <div class="indicater" :style="{left:indicatorPosition+'%'}"></div>
+          <el-slider v-model="player.currentTime" :format-tooltip="formatBar" size="mini" :min="0" :max="playerDuration"></el-slider>
         </div>
         <div class="time-indicater">
           <span>{{currentTime}}</span>
@@ -22,8 +21,10 @@
       <div class="music-info">
         <p class="music-name">{{song.name}}</p>
         <p class="music-author">{{song.albummid.name}} - {{ song.singer.name }}</p>
+
       </div>
       <div class="lyric">
+        <el-slider v-model="player.__.audio.volume" :format-tooltip="formatSound" :min="0" :max="1" :step="0.1"></el-slider>
       </div>
       <div class="music-ctrl">
         <ul>
@@ -64,6 +65,14 @@
       }
     },
     methods: {
+      formatBar(val) 
+      {
+        return this.currentTime;
+      },
+      formatSound(val) 
+      {
+        return val * 10;
+      },
       like()
       {
         
@@ -94,7 +103,7 @@
         this.$parent.playPageShow = false
       },
       movestart: function (event) {
-        console.log('start' + event.touches[0].clientY)
+        //console.log('start' + event.touches[0].clientY)
       },
       moveend: function (event) {
         if (event.changedTouches[0].clientY - this.clientY > 0) {
@@ -110,9 +119,15 @@
     },
     computed: {
       ...mapGetters([
-        'currentTime', 'duration','coverImgUrl'
+        'currentTime', 'duration','coverImgUrl', 'player'
       ]),
       ...mapState({
+
+
+        playerCurrent: state => state.PlayService.currentTime,
+        playerDuration: state => state.PlayService.duration,
+
+
         indicatorPosition: state => state.PlayService.currentTime / state.PlayService.duration * 100,
         playing: state => state.PlayService.playing,
         song: state => state.PlayService.song
@@ -174,6 +189,7 @@
     flex-grow: 2;
     display: flex;
     flex-direction: column;
+    padding: 0 139px 0 138px;
   }
 
   .music-play-page .button-group .progress-bar-group {
@@ -184,6 +200,7 @@
     height: 4px;
     background: #cccccc;
     position: relative;
+    padding: 0 100px 0 100px
   }
 
   .music-play-page .button-group .progress-bar-group .progress-bar .progress {

@@ -1,7 +1,7 @@
 <template>
   <div id="rankpage">
     <div class="singer-photo">
-      <img v-lazy="imgurl" :src="imgurl" alt="singerphoto">
+      <img v-if="!_.isEmpty(imgurl)" :src="imgurl" alt="singerphoto">
     </div>
     <div class="header-bar" :style="{background:background}" :class="{dark:isDark}">
       <div class="back-button" @touchend.prevent="hideSinger" @click="hideSinger">
