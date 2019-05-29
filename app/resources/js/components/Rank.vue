@@ -98,6 +98,8 @@
     flex-direction: column;
     justify-content: space-around;
     overflow: hidden;
+    font-weight: 600;
+    color: #444444;
   }
 
   .rank-item .rank-info .rank-title {

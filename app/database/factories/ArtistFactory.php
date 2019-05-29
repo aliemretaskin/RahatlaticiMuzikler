@@ -8,6 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(Artist::class, function (Faker $faker) {
     return [
        'name' => $faker->name,
-       'picture' => '/assets/artists/' . $faker->image(public_path('assets/artists'),400,400, 'people', false),
+       'picture' => '/assets/artists/' . $faker->image(public_path('assets/artists'),273,273, 'people', false),
     ];
 });

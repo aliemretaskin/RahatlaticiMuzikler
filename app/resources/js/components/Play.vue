@@ -24,7 +24,6 @@
         <p class="music-author">{{song.albummid.name}} - {{ song.singer.name }}</p>
       </div>
       <div class="lyric">
-        <lyric :songid="song.id" :currentTime="currentTime"></lyric>
       </div>
       <div class="music-ctrl">
         <ul>

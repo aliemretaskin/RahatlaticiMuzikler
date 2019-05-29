@@ -1,8 +1,7 @@
 <template>
   <div id="rankpage">
     <div class="singer-photo">
-      <img v-lazy="imgurl"
-           alt="singerphoto">
+      <img v-lazy="imgurl" :src="imgurl" alt="singerphoto">
     </div>
     <div class="header-bar" :style="{background:background}" :class="{dark:isDark}">
       <div class="back-button" @touchend.prevent="hideSinger" @click="hideSinger">
@@ -127,7 +126,7 @@
     },
     computed: {
       color: function () {
-         return '#ff91aa';
+         return '#3498db';
       },
       imgurl: function () {
         if (!_.isEmpty(this.topListData)) {
@@ -343,6 +342,7 @@
     /*background: rgb(135, 112, 101);*/
     z-index: 1;
     padding-bottom: 50px;
+    height: 100vh;
   }
 
   .list .list-title {
@@ -353,6 +353,7 @@
   .list ul {
     list-style: none;
     padding-left: 10px;
+
   }
 
   .list ul li {
@@ -370,6 +371,7 @@
     margin-left: -50px;
     width: 50px;
     text-align: center;
+    color: #fff;
   }
 
   .list ul li .music-info {

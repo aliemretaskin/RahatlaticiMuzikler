@@ -81,7 +81,7 @@
     },
     computed: {
       color: function () {
-        return '#ff91aa';
+        return '#f5f5f5';
       },
 
       gradientcolor: function () {
@@ -164,7 +164,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 67vh;
+    max-width: 68vh;
     min-height: 100%;
     overflow-x: hidden;
     top: 0;
@@ -177,7 +177,7 @@
   .list {
     /*background: rgb(135, 112, 101);*/
     z-index: 1;
-    padding-bottom: 50px;
+    padding: 15px 0;
   }
 
   .list .list-title {
@@ -197,12 +197,11 @@
     justify-content: space-between;
     align-items: center;
     height: 60px;
-    margin-left:44px;
     cursor:pointer;
+    border-bottom: 1px solid #d6d6d6;
   }
 
   .list ul li .music-index{
-    margin-left: -50px;
     width: 50px;
     text-align: center;
   }
@@ -212,6 +211,10 @@
     flex-direction: column;
     flex-grow: 1;
     overflow: hidden;
+  }
+
+  .list ul li .play-button img {
+    padding: 0 7px;
   }
 
   .list ul li .music-info .music-name {

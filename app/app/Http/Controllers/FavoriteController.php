@@ -57,7 +57,7 @@ class FavoriteController extends Controller
 
         if (!$music) 
         {
-            return response()->json(['status' => false, 'errorMessage' => 'Music not found.', 'errorCode' => 422]);
+            return response()->json(['status' => false, 'errorMessage' => 'Music not found.', 'errorCode' => 422])->setStatusCode(422);
         }
 
         $favorite = $request->auth->favorites()->where('music_id', $music->id)->first();

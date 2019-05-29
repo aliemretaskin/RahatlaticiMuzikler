@@ -19,14 +19,14 @@ class TokenChecker
 
         if(!$request->header('Authorization'))
         {  
-            return response()->json(['status' => false, 'errorMessage' => 'This server could not verify that you are authorized to access the document requested.', 'errorCode' => '401']);  
+            return response()->json(['status' => false, 'errorMessage' => 'This server could not verify that you are authorized to access the document requested.', 'errorCode' => '401'])->setStatusCode(401);  
         }  
 
         $token = Token::where('token', $request->header('Authorization'))->first();
 
         if (!$token) 
         {
-            return response()->json(['status' => false, 'errorMessage' => 'Invalid token.', 'errorCode' => '403']); 
+            return response()->json(['status' => false, 'errorMessage' => 'Invalid token.', 'errorCode' => '403'])->setStatusCode(403); 
         }
 
         $request->merge(['auth' => $token]);

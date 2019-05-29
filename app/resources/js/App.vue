@@ -101,7 +101,7 @@ export default {
   created()
   {
 
-      axios.defaults.baseURL = (version ? version : 'v1') + '/api';
+      axios.defaults.baseURL = '/api/' + (version ? version : 'v1');
 
       axios.get( token ? ('/token/' + token) : 'token' ).then((response) => {
           if (response.data.status)
@@ -170,7 +170,7 @@ export default {
 
 html {
   overflow-x: hidden;
-  background: #eeeeee;
+  background: #ecf0f1;
 }
 
 body {
