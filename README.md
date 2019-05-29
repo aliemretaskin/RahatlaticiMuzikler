@@ -74,6 +74,7 @@ Kullabılabilir seed listesi;
 Uygulama 5 farklı konteynırdan oluşmaktadır;
 
 `webserver` Nginx'i ve gerekli ayar dosyalarını belirtir
+
 | Servis | Açıklama |
 | ------ | ------ |
 | webserver | Nginx'i ve gerekli ayar dosyalarını belirtir |
