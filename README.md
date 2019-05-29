@@ -64,7 +64,7 @@ $ ./vendor/bin/phpunit
 
 #### Seeds
 
-Kullabılabilir seed listesi;
+Kullanılabilir seed listesi;
 
 `php artisan db:seed --class=ArtistSeeder` Sanatçı oluşturur
 `php artisan db:seed --class=CategorieSeeder` Kitaplık oluşturur
