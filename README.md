@@ -40,8 +40,8 @@ Uygulamaya dahil edilen açak kaynak kodlu eklentiler;
 
 | Plugin | README |
 | ------ | ------ |
-| element-ui | [https://github.com/ElemeFE/element/blob/dev/README.md][PlGd] |
-| Predis | [https://github.com/nrk/predis/blob/v1.1/README.md][PlGa] |
+| element-ui | [https://github.com/ElemeFE/element/blob/dev/README.md] |
+| Predis | [https://github.com/nrk/predis/blob/v1.1/README.md] |
 
 #### VueJS Dosyalarını Derleme
 
