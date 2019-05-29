@@ -22,8 +22,6 @@ class ApiTest extends TestCase
             ->assertStatus(200)
             ->assertJson(['status' => true])
             ->assertSee('token');
-
-        //dd(json_decode($response->getContent()));
     }
 
     /*
