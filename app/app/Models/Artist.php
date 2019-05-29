@@ -10,4 +10,11 @@ class Artist extends Model
     use SoftDeletes;
 
     protected $hidden = ['updated_at', 'deleted_at'];
+
+    /**
+     * Fields that can be mass assigned.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'picture'];
 }

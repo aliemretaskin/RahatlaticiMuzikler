@@ -11,6 +11,12 @@ class Music extends Model
 
     protected $hidden = ['categorie_id', 'artist_id','updated_at', 'deleted_at'];
     protected $appends = ['is_favorited'];
+    /**
+     * Fields that can be mass assigned.
+     *
+     * @var array
+     */
+    protected $fillable = ['categorie_id', 'artist_id', 'name', 'file'];
 
     /**
      * Music belongs to Categorie.
