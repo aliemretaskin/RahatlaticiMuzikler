@@ -8,7 +8,7 @@
     <div class="content-warper" v-show="rankshow&&!blurBgShow">
       <swiper :options="swiperOption" class="swiper-box">
         <swiper-slide class="swiper-item">
-          <Favorites v-if="renderComponent"></Favorites>
+          <Favorites ref="favs" v-if="renderComponent"></Favorites>
         </swiper-slide>
         <swiper-slide class="swiper-item">
           <rank></rank>

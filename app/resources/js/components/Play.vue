@@ -76,6 +76,7 @@
               if (response.data.status)
               {
                 this.song.favorie = false;
+                this.$parent.$refs.favs.fetchData();
               }
           });
         }
@@ -85,6 +86,7 @@
               if (response.data.status)
               {
                 this.song.favorie = true;
+                this.$parent.$refs.favs.fetchData();
               }
           });
         }

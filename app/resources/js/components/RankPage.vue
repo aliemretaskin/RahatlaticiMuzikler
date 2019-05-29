@@ -85,6 +85,7 @@
               if (response.data.status)
               {
                 song.is_favorited = false;
+                this.$parent.$refs.favs.fetchData();
               }
           });
         }
@@ -94,6 +95,7 @@
               if (response.data.status)
               {
                 song.is_favorited = true;
+                this.$parent.$refs.favs.fetchData();
               }
           });
         }
