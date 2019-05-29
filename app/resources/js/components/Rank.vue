@@ -3,16 +3,10 @@
     <ul>
       <li class="rank-item" v-for="item in topList" @click="showRank(item.id)">
         <div class="rank-media">
-          <img v-lazy="item.picUrl" alt="">
-          <span class="listen-count">{{item.listenCount | listenCount}}</span>
+          <img v-lazy="item.picture" alt="">
         </div>
         <div class="rank-info">
-          <p class="rank-title">{{item.topTitle}}</p>
-          <p class="rank-songs" v-for="(song,index) in item.songList">
-            {{index+1}}
-            {{song.songname}}
-            <span class="rank-singername">-{{song.singername}}</span>
-          </p>
+          <p class="rank-title">{{item.name}}</p>
         </div>
       </li>
     </ul>
@@ -31,26 +25,20 @@
     methods: {
       showRank: function (id) {
         this.$router.push({name: 'rank', params: {id: id}})
-      }
+      },
+      fetchData()
+      {
+        axios.get('albums').then((response) => {
+            if (response.data.status)
+            {
+              this.topList = response.data.albums;
+            }
+        });
+      },
     },
     created: function () {
-
-
-
-
-
-
-      
-      //this.$store.dispatch('getRankList').then((response) => {
-      //  console.log(response.data.data.topList);
-      //  this.topList = response.data.data.topList
-      //})
+      this.fetchData();
     },
-    filters: {
-      listenCount: num => {
-        return Math.round(num / 1000) / 10 + '万'
-      }
-    }
   }
 </script>
 

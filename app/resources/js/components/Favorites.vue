@@ -4,7 +4,7 @@
       <ul>
         <li class="border-1px border-1px-after" v-for="(item,index) in topListData">
           <div class="music-index" :class="{dark:isDark}">{{index+1}}</div>
-          <div class="music-info" @click="play(item.id)">
+          <div class="music-info" @click="play(index)">
             <div class="music-name" :class="{dark:isDark}">
               {{item.music.name}}
             </div>
@@ -164,7 +164,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 68vh;
+    max-width: 67vh;
     min-height: 100%;
     overflow-x: hidden;
     top: 0;

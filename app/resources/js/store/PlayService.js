@@ -25,7 +25,9 @@ export default {
     playMode: def.SEQUENTIAL,
     index: 0,
     song: {
-      name: def.DEFAULT_SONG_NAME
+      name: def.DEFAULT_SONG_NAME,
+      albummid: {},
+      singer: {},
     },
     playList: []
   },
@@ -117,8 +119,11 @@ export default {
     ,
     duration: state =>
     parseInt(state.duration / 60) + ':' + (Array(2).join(0) + (state.duration % 60)).slice(-2),
+    song:state => {
+        return state.song
+    },
     coverImgUrl:state => {
-      if(typeof state.song.albummid === 'undefined')
+      if(_.isEmpty(state.song.albummid))
         return def.DEFAULT_IMG
       else
         return state.song.singer.picture;

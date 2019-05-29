@@ -15,34 +15,39 @@
         </div>
       </div>
     </div>
-    <div id="singer-header" class="header border-1px border-1px-after" v-if="topListData!=null">
+    <div id="singer-header" class="header border-1px border-1px-after" v-if="!_.isEmpty(topListData)">
       <div class="header-blank"></div>
       <div class="header-warp" :style="{background:gradientcolor}">
         <div class="singer-info" :class="{dark:isDark}">
-          <h1 class="singer-name">{{topListData.topinfo.ListName}}</h1>
-          <p class="singer-fans">{{topListData.topinfo.listennum | listenCount}}</p>
+          <h1 class="singer-name">{{topListData.name}}</h1>
+          <p class="singer-fans"></p>
         </div>
         <div class="play-button" @click="play(0)">
           <img src="../assets/icon-play.png">
         </div>
       </div>
     </div>
-    <div class="list" :style="{background:color}" v-if="topListData!=null">
+    <div class="list" :style="{background:color}" v-if="!_.isEmpty(topListData)">
       <ul>
-        <li class="border-1px border-1px-after" v-for="(item,index) in topListData.songlist">
+        <li class="border-1px border-1px-after" v-for="(item,index) in topListData.musics">
           <div class="music-index" :class="{dark:isDark}">{{index+1}}</div>
           <div class="music-info" @click="play(index)">
             <div class="music-name" :class="{dark:isDark}">
-              {{item.data.songorig}}
+              {{item.name}}
             </div>
             <div class="music-singer">
-              <span v-for="singername in item.data.singer">{{singername.name}}-</span>
-              <span>{{item.data.albumname}}</span>
+              <span >{{item.artist.name}} - {{ topListData.name }}</span>
             </div>
           </div>
-          <div class="action-button" @touchend.prevent="showMenu(index)" @click="showMenu(index)">
-            <img src="../assets/icon-...black.png" alt="">
+
+          <div class="play-button">
+            <img style="width: 30px;" @click="like(item)" v-if="item.is_favorited" src="../assets/icon-unlike.png">
+            <img style="width: 30px;" @click="like(item)" v-else src="../assets/icon-like.png">
           </div>
+          <div class="play-button" @click="play(index)">
+            <img src="/images/icon-play.png" class="play-bar-button">
+          </div>
+
         </li>
       </ul>
     </div>
@@ -61,83 +66,70 @@
       }
     },
     methods: {
+      fetchData()
+      {
+        axios.get('albums/' + this.topid).then((response) => {
+            if (response.data.status)
+            {
+              this.topListData = response.data.album;
+            }
+        });
+      },
+
+      like(song)
+      {
+
+        if (song.is_favorited) 
+        {
+          axios.delete('favorites/unlike/' + song.id).then((response) => {
+              if (response.data.status)
+              {
+                song.is_favorited = false;
+              }
+          });
+        }
+        else
+        {
+          axios.post('favorites/like/' + song.id).then((response) => {
+              if (response.data.status)
+              {
+                song.is_favorited = true;
+              }
+          });
+        }
+      },
+
       hideSinger: function () {
         this.$router.go(-1)
       },
       play: function (index) {
         let list = []
-        this.topListData.songlist.forEach(item => {
+        this.topListData.musics.forEach(item => {
           list.push({
-            id: item.data.songid,
-            mid: item.data.songmid,
-            name: item.data.songorig,
-            singer: item.data.singer,
-            albummid: item.data.albummid
+            id: item.id,
+            mid: item.file,
+            name: item.name,
+            singer: item.artist,
+            albummid: this.topListData,
+            favorie: item.is_favorited
           })
         })
+
         this.$store.commit('setPlayList', {
           index: index,
           list: list
         })
         this.$store.commit('play')
       },
-      showMenu: function (num) {
-        this.menuedIndex = num
-        let that = this
-        this.$store.dispatch('notifyActionSheet', {
-          menus: {
-            'title.noop': this.topListData.songlist[num].data.songorig + '<br/><span style="color:#666;font-size:12px;">' + this.getSingerStr(this.topListData.songlist[num].data.singer) + '</span>',
-            playAsNext: '下一首播放',
-            addToPlayList: '添加到播放列表'
-          },
-          handler: {
-            ['cancel'](){
-            },
-            ['playAsNext'](){
-              that.$store.commit('addToPlayListAsNextPlay', {
-                id: that.topListData.songlist[that.menuedIndex].data.songid,
-                mid: that.topListData.songlist[that.menuedIndex].data.songmid,
-                name: that.topListData.songlist[that.menuedIndex].data.songorig,
-                singer: that.topListData.songlist[that.menuedIndex].data.singer,
-                albummid: that.topListData.songlist[that.menuedIndex].data.albummid
-              })
-            },
-            ['addToPlayList'](){
-              that.$store.commit('addToPlayList', {
-                id: that.topListData.songlist[that.menuedIndex].data.songid,
-                mid: that.topListData.songlist[that.menuedIndex].data.songmid,
-                name: that.topListData.songlist[that.menuedIndex].data.songorig,
-                singer: that.topListData.songlist[that.menuedIndex].data.singer,
-                albummid: that.topListData.songlist[that.menuedIndex].data.albummid
-              })
-            }
-          }
-        })
-      },
-      getSingerStr: val => {
-        if (typeof val === 'string') {
-          return val
-        } else if (val instanceof Array) {
-          var singer = ''
-          val.forEach(item => {
-            singer = singer + item.name + ' '
-          })
-          return singer
-        }
-      }
+
     },
     computed: {
       color: function () {
-        if (this.topListData !== null) {
-          var fixed = '00000' + this.topListData.color.toString(16)
-          return '#' + fixed.substr(fixed.length - 6)
-        } else {
-          return '#ffffff'
-        }
+         return '#ff91aa';
       },
       imgurl: function () {
-        if (this.topListData !== null) {
-          return this.topListData.topinfo.pic_album
+        if (!_.isEmpty(this.topListData)) {
+          return this.topListData.picture
         }
       },
       gradientcolor: function () {
@@ -161,10 +153,9 @@
       }
     },
     created: function () {
-      this.$store.dispatch('getRankSongs',this.topid).then((response) => {
-        this.topListData = response.data
-      })
 
+
+      this.fetchData();
       let that = this
       window.onscroll = function () {
         if (document.getElementById('singer-header')) {

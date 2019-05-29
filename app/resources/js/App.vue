@@ -8,7 +8,7 @@
     <div class="content-warper" v-show="rankshow&&!blurBgShow">
       <swiper :options="swiperOption" class="swiper-box">
         <swiper-slide class="swiper-item">
-          <Favorites></Favorites>
+          <Favorites v-if="renderComponent"></Favorites>
         </swiper-slide>
         <swiper-slide class="swiper-item">
           <rank></rank>
@@ -70,6 +70,13 @@ export default {
     swiperSlide
   },
   methods: {
+    updateFavorites() {
+      this.renderComponent = false;
+      
+      this.$nextTick(() => {
+        this.renderComponent = true;
+      });
+    },
     tapButton(event) {
       event.preventDefault();
       this.playing ? this.pause() : this.play();
@@ -124,6 +131,7 @@ export default {
       playPageShow: false,
       blurBgShow: false,
       rankshow: true,
+      renderComponent: true,
       routerViewAnimation: "page-slide",
       swiperOption: {
         pagination: ".swiper-pagination",
