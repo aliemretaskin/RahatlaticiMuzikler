@@ -72,7 +72,7 @@ export default {
       state.duration = time
     },
     play (state) {
-        player.play(state.song.mid);
+      player.play(state.song.mid);
       state.playing = true;
     },
     pause (state) {
@@ -121,7 +121,7 @@ export default {
       if(typeof state.song.albummid === 'undefined')
         return def.DEFAULT_IMG
       else
-        return "https://y.gtimg.cn/music/photo_new/T002R500x500M000"+state.song.albummid+".jpg"
+        return state.song.singer.picture;
     }
   }
 }

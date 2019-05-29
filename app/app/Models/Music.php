@@ -10,6 +10,7 @@ class Music extends Model
 	use SoftDeletes;
 
     protected $hidden = ['categorie_id', 'artist_id','updated_at', 'deleted_at'];
+    protected $appends = ['is_favorited'];
 
     /**
      * Music belongs to Categorie.
@@ -30,4 +31,16 @@ class Music extends Model
     {
     	return $this->belongsTo(Artist::class);
     }
+
+    /**
+     * Music is favorited or not
+     *
+     * @return boolean
+     */
+    public function getIsFavoritedAttribute()
+    {
+        return request()->auth->favorites()->where('music_id', $this->id)->first() ? true : false;
+    }
+
+
 }

@@ -6,7 +6,7 @@ export const PLAY_MODE_IMG = [
   require('../assets/icon-SEQUENTIAL.png'),
   require('../assets/icon-RANDOM.png')
 ]
-export const PLAY_MODE_NAME = ['单曲循环', '顺序播放', '随机播放']
+export const PLAY_MODE_NAME = ['Tekrarlanmayan', 'Sıralı', 'Rastgele']
 export const SINGLE = 0
 export const SEQUENTIAL = 1
 export const RANDOM = 2

@@ -13,6 +13,7 @@ Route::group(['middleware' => 'token'], function ()
 	{
 		Route::get('/',                             	 ['as' => '.list',      		'uses' => 'FavoriteController@list']);
 		Route::delete('unlike/{id}',                     ['as' => '.unlike',      		'uses' => 'FavoriteController@unlike']);
+		Route::post('like/{id}',                     	 ['as' => '.like',      		'uses' => 'FavoriteController@like']);
 	});
 
 

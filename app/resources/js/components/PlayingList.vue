@@ -2,15 +2,15 @@
   <div id="playing-list">
     <div class="tittle border-1px border-1px-after ">
       <img :src="buttonImage" :alt="playModeName" @click="changePlayMode">
-      <p class="tittle-text">{{playModeName}} {{playList.length}}首歌曲</p>
-      <p class="tittle-button" @touchend.prevent="hidePlayList" @click="hidePlayList">完成</p>
+      <p class="tittle-text">{{playModeName}}</p>
+      <p class="tittle-button" @touchend.prevent="hidePlayList" @click="hidePlayList">Gizle</p>
     </div>
     <div class="m-list">
       <ul>
         <li class="border-1px border-1px-after list-item" v-for="(item,num) in playList">
           <div class="music-info" @click="play(num)">
             <p class="music-name">{{item.name}}</p>
-            <p class="music-author">-{{item.singer | singer}}</p>
+            <p class="music-author">-{{item.albummid.name}} - {{ item.singer.name }}</p>
             <img class="music-playing" src="./../assets/icon-playing.svg" alt="正在播放"
                  v-show="index==num">
           </div>
@@ -44,8 +44,8 @@
         let that = this
         this.$store.dispatch('notifyActionSheet', {
             menus:{
-              'title.noop': this.playList[num].name + '<br/><span style="color:#666;font-size:12px;">' + this.getSingerStr(this.playList[num].singer) + '</span>',
-              delete: '删除'
+              'title.noop': this.playList[num].name + '<br/><span style="color:#666;font-size:12px;">' + this.getSingerStr(this.playList[num].singer.name) + '</span>',
+              delete: 'Listeden Sil'
             },
           handler:{
             ['cancel'](){

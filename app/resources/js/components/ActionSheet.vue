@@ -30,7 +30,7 @@
     data(){
       return {
         showCancel: true,
-        cancelText: '取消',
+        cancelText: 'Kapat',
       }
     },
     methods: {

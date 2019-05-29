@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Favorite;
+use App\Models\Music;
+
 class FavoriteController extends Controller
 {
 
@@ -28,7 +31,7 @@ class FavoriteController extends Controller
      */
     public function unlike(Request $request, $id)
     {
-    	$favorite = $request->auth->favorites()->find($id);
+    	$favorite = $request->auth->favorites()->where('music_id', $id)->first();
 
     	if ($favorite) 
     	{
@@ -37,7 +40,41 @@ class FavoriteController extends Controller
     	}
     	else
     	{
-    		return response()->json(['status' => true, 'msg' => 'Music allready unliked.']);
+    		return response()->json(['status' => true, 'msg' => 'Music already unliked.']);
     	}
     }
+
+    /**
+     * Like favorite music
+     *
+     * @param  $id unique music id
+     * @return json
+     */
+    public function like(Request $request, $id)
+    {
+
+        $music = Music::find($id);
+
+        if (!$music) 
+        {
+            return response()->json(['status' => false, 'errorMessage' => 'Music not found.', 'errorCode' => 422]);
+        }
+
+        $favorite = $request->auth->favorites()->where('music_id', $music->id)->first();
+
+        if ($favorite) 
+        {
+            return response()->json(['status' => true, 'msg' => 'Music already liked.']);
+        }
+        else
+        {
+            Favorite::create([
+                'token_id' => $request->auth->id,
+                'music_id' => $music->id
+            ]);
+
+            return response()->json(['status' => true, 'msg' => 'Liked.']);
+        }
+    }
+
 }

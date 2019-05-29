@@ -11,7 +11,7 @@
           <img src="../assets/icon-back-white.svg" v-if="isDark">
         </div>
         <div class="back-text">
-          排行榜
+          Geri
         </div>
       </div>
     </div>

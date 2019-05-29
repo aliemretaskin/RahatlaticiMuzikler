@@ -6,12 +6,9 @@
            @click="hidePlayPage">
         <img src="../assets/icon-jiantou.png" alt="">
       </div>
-      <img v-lazy="coverImgUrl"
-           @touchstart="movestart"
-           @touchend="moveend">
+      <img v-lazy="coverImgUrl" :src="coverImgUrl">
     </div>
     <div class="button-group">
-      <img class="blurbg" :src="coverImgUrl">
       <div class="progress-bar-group">
         <div class="progress-bar">
           <div class="progress" :style="{width:indicatorPosition+'%'}"></div>
@@ -24,14 +21,17 @@
       </div>
       <div class="music-info">
         <p class="music-name">{{song.name}}</p>
-        <p class="music-author">{{song.singer | singer}}</p>
+        <p class="music-author">{{song.albummid.name}} - {{ song.singer.name }}</p>
       </div>
       <div class="lyric">
         <lyric :songid="song.id" :currentTime="currentTime"></lyric>
       </div>
       <div class="music-ctrl">
         <ul>
-          <li><img src="../assets/icon-like.png"></li>
+          <li>
+            <img @click="like" v-if="song.favorie" src="../assets/icon-unlike.png">
+            <img @click="like" v-else src="../assets/icon-like.png">
+          </li>
 
           <li><img src="../assets/icon-shangyiqu.png"
                    @touchend.prevent="playFront"
@@ -65,6 +65,30 @@
       }
     },
     methods: {
+      like()
+      {
+        
+        let song = this.song;
+
+        if (song.favorie) 
+        {
+          axios.delete('favorites/unlike/' + song.id).then((response) => {
+              if (response.data.status)
+              {
+                this.song.favorie = false;
+              }
+          });
+        }
+        else
+        {
+          axios.post('favorites/like/' + song.id).then((response) => {
+              if (response.data.status)
+              {
+                this.song.favorie = true;
+              }
+          });
+        }
+      },
       hidePlayPage: function () {
         this.$parent.playPageShow = false
       },
@@ -93,19 +117,6 @@
         song: state => state.PlayService.song
       })
     },
-    filters: {
-      singer: val => {
-        if (typeof val === 'string') {
-          return val
-        } else if (val instanceof Array) {
-          let singer = ''
-          val.forEach(item => {
-            singer = singer + item.name + ' '
-          })
-          return singer
-        }
-      }
-    }
   }
 </script>
 
@@ -150,11 +161,11 @@
     width: 100%;
     z-index: -1;
     display: block;
-    -webkit-filter: blur(30px);
+    /*-webkit-filter: blur(30px);
     -moz-filter: blur(30px);
     -ms-filter: blur(30px);
     -o-filter: blur(30px);
-    filter: blur(30px);
+    filter: blur(30px);*/
   }
 
   .music-play-page .button-group .lyric {
