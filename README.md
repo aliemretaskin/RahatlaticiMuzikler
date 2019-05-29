@@ -13,7 +13,7 @@ Uygulamayı destekleyen açık kaynaklı projeler:
 * [Laravel](https://laravel.com) - The PHP Framework For Web Artisans
 * [Redis](https://redis.io/) -  Redis in-memory data structure store
 * [Mysql](https://www.mysql.com) - Database management system
-* [phpMyAdmin](https://www.phpmyadmin.net) - https://www.phpmyadmin.net/
+* [phpMyAdmin](https://www.phpmyadmin.net) -  Bringing MySQL to the web
 * [Docker](https://www.docker.com) - Securely build, share and run any application, anywhere
 * [PHP 7.2](https://www.php.net) - General-purpose programming language originally designed for web development
 * [Nginx](https://www.nginx.com/) - Improve the performance, reliability, and security of your applications
