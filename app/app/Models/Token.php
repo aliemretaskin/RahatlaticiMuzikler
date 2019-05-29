@@ -15,4 +15,14 @@ class Token extends Model
 	 * @var array
 	 */
 	protected $fillable = ['token'];
+
+	/**
+	 * Token has many Favorites.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function favorites()
+	{
+		return $this->hasMany(Favorite::class);
+	}
 }

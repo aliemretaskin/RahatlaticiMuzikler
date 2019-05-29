@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Categorie extends Model
+class Artist extends Model
 {
-	use SoftDeletes;
-	
-    protected $hidden = ['deleted_at', 'updated_at'];
+    use SoftDeletes;
+
+    protected $hidden = ['updated_at', 'deleted_at'];
 }
