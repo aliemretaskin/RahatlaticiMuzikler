@@ -5,6 +5,8 @@ import VueLazyload from 'vue-lazyload'
 import App from './App'
 import store from './store'
 import router from './router'
+import _ from 'lodash'
+
 window.axios = require('axios');
 
 Vue.use(VueResource);
@@ -14,6 +16,8 @@ Vue.use(VueLazyload, {
     attempt: 1
   }
 )
+
+Vue.prototype._ = _;
 
 /* eslint-disable no-new */
 new Vue({
