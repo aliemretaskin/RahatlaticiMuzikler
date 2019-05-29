@@ -1,9 +1,9 @@
 # Rahatlatıcı Müzikler Uygulaması
 
 PHP Challenge için hazırlanmış olan Rahatlatıcı Müzikler Uygulaması
-  - Api Token based ile üyelik gerektirmeyez
+  - Api Token based ile üyelik gerektirmez
   - Tüm müzikler kategorilendirilip listelenebilir
-  - Müzikler favori listesine eklenip çıkartılabilir
+  - Müzikler favori listesine eklenip çıkarılabilir
 
 ### Teknolojiler
 
@@ -21,11 +21,10 @@ Uygulamayı destekleyen açık kaynaklı projeler:
 
 ### Kurulum
 
-Kurulum için [Docker](https://docs.docker.com/) kurulumu gerekmektedir.
+Kurulum için [Docker](https://docs.docker.com/) uygulaması gerekmektedir.
 
 Kaynak dosyalarını indirin ve klasöre çıkartın. Dilerseniz port ve ayarları docker-compose.yml adresinden düzenleyebilirsiniz.
 
-VueJS uygulamasını kullanmak için
 ```sh
 $ docker-compose up --build
 ```
