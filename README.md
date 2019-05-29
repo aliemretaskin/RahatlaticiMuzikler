@@ -45,7 +45,7 @@ Uygulamaya dahil edilen açak kaynak kodlu eklentiler;
 
 #### VueJS Dosyalarını Derleme
 
-VueJS uygulamasını derlemek için açık konteynırları listeleyip `php` adlı uygulamanın içerisine girelim
+VueJS uygulamasını derlemek için açık konteynerleri listeleyip `php` adlı uygulamanın içerisine girelim
 
 ```sh
 $ docker-ps
@@ -71,7 +71,7 @@ Kullabılabilir seed listesi;
 `php artisan db:seed --class=MusicSeeder` Müzik oluşturur
 
 ### Docker
-Uygulama 5 farklı konteynırdan oluşmaktadır;
+Uygulama 5 farklı konteynerden oluşmaktadır;
 
 | Servis | Açıklama |
 | ------ | ------ |
@@ -83,7 +83,7 @@ Uygulama 5 farklı konteynırdan oluşmaktadır;
 
 ### Güvenlik açıkları
 
-Eğer herhangi bir güvenlik açığı bulursanız aliemretaskin@gmail.com adresinden benle iletişime geçebilirsiniz.
+Eğer herhangi bir güvenlik açığı bulursanız aliemretaskin@gmail.com adresinden benimle iletişime geçebilirsiniz.
 
 ### Lisans
 
